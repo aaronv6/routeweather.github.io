@@ -1,0 +1,199 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+#header {
+    background: #2c3e50;
+    color: white;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+#header h1 { font-size: 1.5rem; margin-bottom: 10px; }
+
+#controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+#controls input, #controls select {
+    width: 250px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    background: white;
+    color: #2c3e50;
+}
+#controls input {
+    background-image: none;
+    padding-right: 10px;
+}
+#controls select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath fill='%23999' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 10px 6px;
+    appearance: none;
+}
+#departureDate {
+    width: 200px !important;
+}
+#departureTime {
+    width: 100px !important;
+}
+.autocomplete-suggestions {
+    position: absolute;
+    background: #2c3e50;
+    border: 1px solid #34495e;
+    border-radius: 5px;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 1001;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: none;
+    color: white;
+    width: 250px;
+}
+.autocomplete-suggestions div {
+    padding: 10px 12px;
+    cursor: pointer;
+}
+.autocomplete-suggestions div:hover,
+.autocomplete-suggestions div.selected { background: #34495e; }
+
+#controls button {
+    padding: 10px 24px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+}
+#swapBtn {
+    width: 36px;
+    height: 36px;
+    padding: 0 !important;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#map { flex: 1; }
+#alerts {
+    position: fixed;
+    top: 80px;
+    right: 10px;
+    max-width: 400px;
+    z-index: 1000;
+}
+.alert {
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.alert:hover { transform: scale(1.02); }
+.alert-wind { background: #e74c3c; }
+.alert-visibility { background: #f39c12; }
+
+.weather-marker {
+    background: white;
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    max-width: 110px;
+    max-height: 140px;
+    text-align: center;
+    border: 3px solid #ecf0f1;
+}
+.weather-marker.high-wind { border-color: #e74c3c; }
+.weather-marker.snow-ice { border-color: #3498db; }
+.weather-marker.low-vis { border-color: #f39c12; }
+
+.weather-marker .cond-temp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    max-height: 20px;
+}
+.weather-marker .condition-icon { font-size: 26px; }
+.weather-marker .temp { font-size: 16px; font-weight: bold; color: #2c3e50; }
+.weather-marker .wind {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 14px;
+}
+.weather-marker .wind-arrow {
+    display: inline-block;
+    font-size: 24px;
+}
+.weather-marker .wind-values {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    margin-left: 6px;
+    margin-right: -6px;
+}
+.weather-marker .wind-unit {
+    font-size: 10px;
+    margin: 0;
+}
+.weather-marker .condition-label {
+    font-size: 11px;
+    color: #555;
+    margin: 4px 0 0;
+    line-height: 1.2;
+}
+.weather-marker .time, .weather-marker .vis {
+    font-size: 11px;
+    color: #555;
+}
+
+.leaflet-marker-icon {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#loading {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 20px 45px;
+    border-radius: 10px;
+    z-index: 2000;
+    display: none;
+}
+#info {
+    background: rgba(255,255,255,0.95);
+    color: #2c3e50;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+#info span {
+    margin-right: 12px;
+}
